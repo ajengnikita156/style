@@ -1,7 +1,7 @@
 <template>
     <center>
 
-    <div class="m-10 max-w-sm" style="margin-top: 120px;">
+    <div class="m-10 max-w-sm" style="margin-top: 10px;">
   <div class="rounded-lg border bg-white px-4 pt-8 pb-10 shadow-lg">
     <div class="relative mx-auto w-36 rounded-full">
       <img class="mx-auto h-auto w-full rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5sbcmkeP9sVulyi_8lhSnIrs7nji0F-YfRQ&usqp=CAU" alt="" />
@@ -17,25 +17,25 @@
     <ul class="mt-3 divide-y rounded bg-gray-100 py-2 px-3 text-black-600 shadow-sm hover:text-black hover:shadow">
       <li class="flex items-center py-3 text-sm">
         <span>Address</span>
-        <span class="ml-auto"><span class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700">{{ address.address }}</span></span>
+        <span class="ml-auto"><span class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700">{{ address.address }},{{ address.city }},{{ address.state }},{{ address.country }}</span></span>
       </li>
     </ul>
     <ul class="mt-3 divide-y rounded bg-blue-100 py-2 px-3 text-black-600 shadow-sm hover:text-black hover:shadow">
       <li class="flex items-center py-3 text-sm">
-        <span>City</span>
-        <span class="ml-auto"><span class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700">{{ address.city }}</span></span>
+        <span>In Cart</span>
+        <span class="ml-auto"><span class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700">{{ getKeranjang.length }}</span></span>
       </li>
     </ul>
     <ul class="mt-3 divide-y rounded bg-gray-100 py-2 px-3 text-black-600 shadow-sm hover:text-black hover:shadow">
       <li class="flex items-center py-3 text-sm">
-        <span>Province</span>
-        <span class="ml-auto"><span class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700">{{ address.state }}</span></span>
+        <span>In Wishlist</span>
+        <span class="ml-auto"><span class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700">8</span></span>
       </li>
     </ul>
     <ul class="mt-3 divide-y rounded bg-blue-100 py-2 px-3 text-black-600 shadow-sm hover:text-black hover:shadow">
       <li class="flex items-center py-3 text-sm">
-        <span>Country</span>
-        <span class="ml-auto"><span class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700">{{ address.country }}</span></span>
+        <span>Ordered</span>
+        <span class="ml-auto"><span class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700">{{ getDasboard.total_order_products }}</span></span>
       </li>
     </ul>
   </div>
@@ -55,15 +55,24 @@
         computed: {
             ...mapState('users', ['userData']),
             ...mapState('keranjang', ['address']),
-            ...mapGetters('keranjang', ['getAddress'])
+            ...mapGetters('keranjang', ['getAddress']),
+            ...mapGetters('keranjang', ['getKeranjang']),
+            ...mapGetters('users', ['getDasboard'])
+
         },
         methods: {
-            ...mapActions('users', ['fetchUser']),
+            ...mapActions('users', ['fetchUser', 'fetchDasboard']),
+            ...mapActions('keranjang', ['fetchKeranjang']),
+
             ...mapActions('keranjang', ['fetchAddress'])
         },
         created() {
             this.uData = this.fetchUser();
             this.fetchAddress();
+            this.fetchKeranjang()
+            this.fetchDasboard()
+
+
         },
         
     }

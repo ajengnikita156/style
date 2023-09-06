@@ -1,5 +1,5 @@
 <template>
-  <div><center><img src="https://o.remove.bg/downloads/e439e13b-9fb7-45a8-bec9-144a401dbfac/png-transparent-round-green-check-mark-illustration-check-mark-bottle-material-green-tick-miscellaneous-angle-company-removebg-preview.png" style="width: 200px; "></center></div>
+  <div><center><img src="../assets/img/ceklis.png" style="width: 200px; "></center></div>
       <div class="message text-center" >
         <h1 class="text-3xl font-bold pt-10">Thank You for Your Order</h1>
         <p>Order Code : {{ getOrder.code }}</p>
