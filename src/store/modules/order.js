@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const order = {
   namespaced: true,
@@ -14,10 +14,10 @@ const order = {
         const urlOrder = `https://ecommerce.olipiskandar.com/api/v1/user/order/${orderCode}`;
         const responseOrder = await axios.get(urlOrder, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        commit('SET_ORDER', responseOrder.data['data']);
+        commit("SET_ORDER", responseOrder.data["data"]);
       } catch (error) {
         console.error(error);
         alert(error);

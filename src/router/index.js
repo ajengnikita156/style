@@ -7,9 +7,14 @@ import SingleProduct from "../views/SingleProduct.vue";
 import Contact from "../views/Contact.vue";
 import Brand from "../views/Brand.vue";
 import Kategori from "../views/Kategori.vue";
+import FilterBrand from "../views/FilterBrand.vue";
 import Profile from "../views/Profile.vue";
 import CartCheckout from "../views/CartCheckout.vue";
 import Order from "../views/Order.vue";
+import Wishlist from "../views/Wishlist.vue";
+import FilterPageCategory from "../views/FilterPageCategory.vue";
+import Offers from "../views/Offers.vue";
+
 
 function cekToken(to, from, next) {
     var isAuthenticated = false;
@@ -77,17 +82,40 @@ const routes = [
         component: Brand,
     },
     {
+        path: '/brand/:id',
+        name: 'FilterBrand',
+        component: FilterBrand
+    },
+    {
         path: "/kategori",
         name: "Kategori",
         component: Kategori,
     },
+   
     {
         path: "/profile",
         name: "Profile",
         component: Profile,
         beforeEnter: cekToken
     },
+    {
+        path: "/wishlists",
+        name: "Wishlist",
+        component: Wishlist,
+    },
+    {
+        path: "/kategori/:slug",
+        name: "FilterCategory",
+        component: FilterPageCategory,
+        props: true,
+    },
+    {
+        path: "/offers",
+        name: "Offers",
+        component: Offers,
+    },
 ]
+
 
 const router = createRouter({
     history: createWebHistory(),

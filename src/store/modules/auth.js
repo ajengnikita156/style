@@ -21,7 +21,7 @@ const auth = {
         localStorage.setItem('token', token);
         commit('SET_TOKEN', token);
         console.log(token);
-        alert("Login Successfully !")
+        
 
         return true;
       } catch (error) {

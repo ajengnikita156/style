@@ -1,30 +1,41 @@
 <template>
-  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16" style="margin-top: 45px;">
-    
-
-    <div class="grid md:grid-cols-4 gap-8">
-      <div
-        v-for="product in getProduct"
-        :key="product.id"
-        class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-      >
-        <a href="#">
-          <img
-            class="p-8 rounded-t-lg"
-            src="../assets/img/product.jpg"
-            alt="product image"
-          />
-        </a>
-
-        <div class="px-5 pb-5">
-          <a href="#">
-            <h5
-              class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
-            >
-              {{ capitalizeFirstLetter(product.name) }}
-            </h5>
+  <div style="margin-top: 40px;">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16" id="scroll_product">
+      <center>
+        <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+          ALL PRODUCT IN BRAND {{ brand.name }}
+        </h1>
+      </center>
+      <br />
+      <div class="grid md:grid-cols-4 gap-8">
+        <div
+          v-for="brand in getBrandById"
+          :key="brand.id"
+          class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        >
+          <a href="">
+            <img
+              src="https://i.pinimg.com/236x/a4/27/63/a427633b708edc49c3cec523ad110058.jpg"
+              alt="Product"
+              class="h-80 w-72 object-cover rounded-t-xl"
+            />
           </a>
-          <div class="flex items-center mt-2.5 mb-5">
+          <div class="px-4 py-3 w-72">
+            <router-link
+              :to="{ name: 'SingleProduct', params: { slug: brand.slug } }"
+              class="group"
+            >
+              <a href="">
+                <span class="text-gray-400 mr-3 "
+                  > {{ brand.slug }}</span
+                >
+              </a>
+              <a href="/product">
+                <p class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                  {{ brand.name }}
+                </p>
+              </a>
+              <div class="flex items-center mt-2.5 mb-5">
             <svg
               class="w-4 h-4 text-yellow-300 mr-1"
               aria-hidden="true"
@@ -85,28 +96,17 @@
               >5.0</span
             >
           </div>
-          <div class="flex items-center justify-between">
-            <span class="text-3xl font-bold text-gray-900 dark:text-white">{{
-              formatRupiah(product.base_price)
-            }}</span>
+              <div class="flex items-center">
+                <p class="text-3xl font-bold">
+                  {{ formatRupiah(brand.base_discounted_price) }}
+                </p>
+                <div class="ml-28"></div>
+              </div>
+            </router-link>
+            
           </div>
-          <div class="flex items-center justify-between">
-            <span class="text-3xl font-bold text-gray-900 dark:text-white">
-              <router-link
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-8 focus:outline-none focus:ring-blue-500 font-large rounded-lg text-sm px-20 py-3 text-center mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800"
-                :to="{ name: 'SingleProduct', params: { id: product.id } }"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                />
 
-                Detail</router-link
-              >
-            </span>
-            <br /><br />
-          </div>
+          
         </div>
       </div>
     </div>
@@ -117,17 +117,19 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  data() {
+    return {
+      brand: "",
+    };
+  },
   computed: {
-    ...mapGetters("product", ["getProduct"]),
-    ...mapGetters("kategori", ["getKategori"]),
+    ...mapGetters("brand", ["getBrandById"]),
+    product() {
+      return this.getBrandById(Number(this.$route.params.id));
+    },
   },
   methods: {
-    ...mapActions("product", ["fetchProduct"]),
-    ...mapActions("kategori", ["fetchKategori"]),
-    capitalizeFirstLetter(text) {
-      return text.charAt(0).toUpperCase() + text.slice(1);
-    },
-    ...mapActions("keranjang", ["fetchKeranjang"]),
+    ...mapActions("brand", ["fetchBrand", "fetchBrandById"]),
 
     // Format Rupiah
     formatRupiah(number) {
@@ -139,12 +141,11 @@ export default {
     },
   },
   beforeMount() {
-    this.fetchKeranjang();
-    this.fetchKategori();
+    this.fetchBrand();
   },
-
   mounted() {
-    this.fetchProduct();
+    const brandId = this.$route.params.id;
+    this.fetchBrandById(brandId);
   },
 };
 </script>

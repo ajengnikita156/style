@@ -6,8 +6,10 @@ import kategori from './modules/kategori';
 import users from './modules/user';
 import keranjang from './modules/keranjang';
 import order from './modules/order';
-
-
+import checkout from './modules/checkout';
+import wishlist from './modules/wishlist';
+import search from './modules/search';
+import offers from './modules/offers';
 
 const store = createStore({
   state: {
@@ -20,9 +22,12 @@ const store = createStore({
     product,
     users,
     keranjang,
-    order
-    
-  },
+    order,
+    checkout,
+    wishlist,
+    search,
+    offers
+ },
 });
 
 export default store;

@@ -18,11 +18,7 @@ import { mapGetters, mapActions } from 'vuex';
 
     export default {
         name: 'CartBadgeComponent',
-        // data() {
-        //     return {
-        //         total: 0
-        //     }
-        // },
+     
         computed: {
             ...mapGetters('keranjang', ['getKeranjang'])
         },
