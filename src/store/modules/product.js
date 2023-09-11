@@ -6,6 +6,8 @@ const product = {
     products: [],
     keranjang: [],
     wishlist: [],
+    flashProduct: [],
+
 
   },
   getters: {
@@ -17,6 +19,8 @@ const product = {
       console.log("Product:", product);
       return product;
     },
+    getFlashProduct: (state) => state.flashProduct,
+
   },
   actions: {
     async fetchProduct({ commit }) {
@@ -89,7 +93,15 @@ const product = {
           dispatch("keranjang/fetchKeranjang", null, { root: true });
         }
       },
-   
+      async fetchFlashProduct({ commit }) {
+        try {
+          const shortData = await axios.get("https://ecommerce.olipiskandar.com/api/v1/product/latest/6")
+          commit('ADD_FLASH_PRODUCT', shortData.data['data'])
+        } catch (error) {
+          alert('Ada Error')
+          console.log(error)
+        }
+      },
   },
   mutations: {
     SET_PRODUCTS(state, products) {
@@ -103,6 +115,9 @@ const product = {
     },
     ADD_WISHLIST(state, wishlist) {
         state.wishlist = wishlist;
+      },
+      ADD_FLASH_PRODUCT(state, flashProduct) {
+        state.flashProduct = flashProduct
       },
   },
 };
