@@ -19,7 +19,7 @@ const wishlist = {
           }
         })
         console.log(dataWishlist.data.data)
-        commit('SET_WISHLIST', dataWishlist.data.data.data)
+        commit('SET_WISHLIST', dataWishlist.data.data)
       } catch (error) {
         alert('Ada Error')
         console.log(error)
