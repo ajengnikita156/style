@@ -64,7 +64,7 @@
             <span class="ml-auto"
               ><span
                 class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700"
-                >{{ getWishlist.data.length }}</span
+                >6</span
               ></span
             >
           </li>
