@@ -64,7 +64,7 @@
             <span class="ml-auto"
               ><span
                 class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700"
-                >5{{ getWishlist.length }}</span
+                >{{ getWishlist.data.length }}</span
               ></span
             >
           </li>
@@ -180,5 +180,8 @@ export default {
     this.fetchDasboard();
     this.fetchWishlist();
   },
+  beforeMount(){
+            this.fetchWishlist
+        }
 };
 </script>

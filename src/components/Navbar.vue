@@ -1,25 +1,35 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import CartBadgeComponent from "./CartBadgeComponent.vue";
-import SerchComponent from './SerchComponent.vue';
-
+import SerchComponent from "./SerchComponent.vue";
 
 export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"]),
+    ...mapGetters("wishlist", ["getWishlist"]),
   },
   methods: {
     ...mapActions("auth", ["logout"]),
+    ...mapActions("wishlist", ["fetchWishlist"]),
+  },
+  beforeMount() {
+    this.fetchWishlist;
+  },
+  created() {
+    
+    this.fetchWishlist();
   },
 
-  components: { 
+  components: {
     CartBadgeComponent,
-    SerchComponent
-   },
+    SerchComponent,
+  },
 };
 </script>
 <template>
-   <nav class="bg-white dark:bg-gray-900 fixed w-full  top-0 left-0 border-b border-blue-200 dark:border-gray-800">
+  <nav
+    class="bg-white dark:bg-gray-900 fixed w-full top-0 left-0 border-b border-blue-200 dark:border-gray-800"
+  >
     <div
       class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
     >
@@ -31,9 +41,17 @@ export default {
           style="text-decoration-color: blue"
         />
         <router-link to="/" class="flex items-center">
-                <img src="../assets/img/bju.png" class="h-9 mr-3" alt="Flowbite Logo" style="width: 60px; height: 60px;" />
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Style.mu</span>
-            </router-link>
+          <img
+            src="../assets/img/bju.png"
+            class="h-9 mr-3"
+            alt="Flowbite Logo"
+            style="width: 60px; height: 60px"
+          />
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+            >Style.mu</span
+          >
+        </router-link>
       </a>
       <button
         data-collapse-toggle="navbar-default"
@@ -127,7 +145,7 @@ export default {
             >
               Category
             </router-link>
-           <!--<router-link
+            <!--<router-link
                 to="/offers"
                 class="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
               >
@@ -165,8 +183,7 @@ export default {
           <div
             class="absolute inline-flex items-center justify-center mr-4 w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900"
           >
-            3
-          </div>
+6</div>
         </router-link>
         <CartBadgeComponent></CartBadgeComponent>
 
@@ -192,5 +209,4 @@ export default {
       </div>
     </div>
   </nav>
-
 </template>

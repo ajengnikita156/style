@@ -7,7 +7,7 @@
       <div
         v-for="product in getProduct"
         :key="product.id"
-        class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 rounded-xl duration-500 hover:scale-105"
       >
         <a href="#">
           <img
