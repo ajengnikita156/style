@@ -95,8 +95,8 @@ const product = {
       },
       async fetchFlashProduct({ commit }) {
         try {
-          const shortData = await axios.get("https://ecommerce.olipiskandar.com/api/v1/product/latest/6")
-          commit('ADD_FLASH_PRODUCT', shortData.data['data'])
+          const flashData = await axios.get("https://ecommerce.olipiskandar.com/api/v1/product/latest/6")
+          commit('ADD_FLASH_PRODUCT', flashData.data['data'])
         } catch (error) {
           alert('Ada Error')
           console.log(error)

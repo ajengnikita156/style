@@ -64,7 +64,7 @@
             <span class="ml-auto"
               ><span
                 class="rounded-full bg-blue-300 py-1 px-2 text-xs font-medium text-black-700"
-                >8</span
+                >5{{ getWishlist.length }}</span
               ></span
             >
           </li>
@@ -81,6 +81,15 @@
               ></span
             >
           </li>
+          <div  class="flex md:order-2 " style="text-align: center;">
+            <button 
+              to="/trackorder"
+              type="button"
+              class="block text-md px-4 py-2 rounded text-blue-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0"
+            >
+              Track Order
+            </button>
+          </div>
         </ul>
       </div>
     </div>
@@ -104,7 +113,7 @@
               >
                 <img
                   class="rounded-xl"
-                  src="https://i.pinimg.com/236x/a4/27/63/a427633b708edc49c3cec523ad110058.jpg"
+                  src="../assets/img/product.jpg"
                 />
                 <div class="flex justify-between items-center">
                   <div>
@@ -147,11 +156,13 @@ export default {
     ...mapGetters("keranjang", ["getAddress"]),
     ...mapGetters("keranjang", ["getKeranjang"]),
     ...mapGetters("users", ["getDasboard"]),
+    ...mapGetters("wishlist", ["getWishlist"]),
+
   },
   methods: {
     ...mapActions("users", ["fetchUser", "fetchDasboard"]),
     ...mapActions("keranjang", ["fetchKeranjang"]),
-
+    ...mapActions("wishlist", ["fetchWishlist"]),
     ...mapActions("keranjang", ["fetchAddress"]),
     // Format Rupiah
     formatRupiah(number) {
@@ -167,6 +178,7 @@ export default {
     this.fetchAddress();
     this.fetchKeranjang();
     this.fetchDasboard();
+    this.fetchWishlist();
   },
 };
 </script>

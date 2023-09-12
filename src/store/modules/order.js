@@ -4,9 +4,12 @@ const order = {
   namespaced: true,
   state: {
     orderData: [],
+    trackData:[],
   },
   getters: {
     getOrder: (state) => state.orderData,
+    gettrackOrder: (state) => state.trackData,
+
   },
   actions: {
     async fetchOrderData({ commit }, orderCode) {
@@ -23,10 +26,27 @@ const order = {
         alert(error);
       }
     },
+    async fetchTrackData({ commit }, orderCode) {
+      try {
+        const urlOrder = `https://ecommerce.olipiskandar.com/api/v1/user/order/${orderCode}`;
+        const responseOrder = await axios.get(urlOrder, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        commit("SET_TRACK_ORDER", responseOrder.data["data"]);
+      } catch (error) {
+        console.error(error);
+        alert(error);
+      }
+    },
   },
   mutations: {
     SET_ORDER(state, order) {
       state.orderData = order;
+    },
+    SET_TRACK_ORDER(state, order) {
+      state.trackData = order;
     },
   },
 };

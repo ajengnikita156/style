@@ -14,6 +14,8 @@ import Order from "../views/Order.vue";
 import Wishlist from "../views/Wishlist.vue";
 import FilterPageCategory from "../views/FilterPageCategory.vue";
 import Offers from "../views/Offers.vue";
+import TrackOrder from "../views/TrackOrder.vue";
+
 
 
 function cekToken(to, from, next) {
@@ -113,6 +115,11 @@ const routes = [
         path: "/offers",
         name: "Offers",
         component: Offers,
+    },
+    {
+        path: "/trackorder",
+        name: "TrackOrder",
+        component: TrackOrder,
     },
 ]
 
